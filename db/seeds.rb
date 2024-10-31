@@ -19,7 +19,7 @@ User.destroy_all
 City.destroy_all
 
 10.times do |index|
-  City.create(id: index+1, name: Faker::Address.city)
+  City.create(id: index+1, name: Faker::Address.city.upcase)
 end
 
 
@@ -31,7 +31,7 @@ end
   description = Faker::Quote.yoda
   email = Faker::Internet.email
   age = rand(18..100)
-  u = User.create(id: index+1, first_name: first_name, last_name: last_name, description: description, email: email, age: age, city_id: index+1)
+  u = User.create(id: index+1, first_name: first_name, last_name: last_name, description: description, email: email, age: age, city_id: index+1, password: "jeanPaul42")
 end
 
 

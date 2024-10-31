@@ -14,8 +14,9 @@ class GossipsController < ApplicationController
 
   def create
     filtered_params = params.except(:authenticity_token, :commit) # Exclure les paramètres indésirables
-  @gossip = Gossip.new(filtered_params.permit(:title, :content))
-  @gossip.user = User.find_by(first_name: "anonymous") || User.first
+    @gossip = Gossip.new(filtered_params.permit(:title, :content))
+    @gossip.id = Gossip.all.length + 1
+    @gossip.user = User.find_by(first_name: "anonymous") || User.first
 
     if @gossip.save # essaie de sauvegarder en base @gossip
       # si ça marche, il redirige vers la page d'index du site

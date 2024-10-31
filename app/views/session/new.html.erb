@@ -1,0 +1,34 @@
+<html>
+  <body>
+    
+    <!-- ... -->
+
+
+    <%= form_tag new_session_path(action: 'create'), method: "get" do %>
+    <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+
+      
+
+      <%= label_tag 'email' %>
+      <%= text_field_tag 'email' %>
+      <br /> <br />
+
+      
+
+      <%= label_tag 'mot_de_passe' %>
+      <%= password_field_tag 'password' %>
+      <br /> <br />
+
+     
+
+      <%= submit_tag "Valider" %>
+
+    <% end %>
+
+    <% if flash[:notice] %>
+        <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    <!-- ... -->
+  </body>
+</html>
