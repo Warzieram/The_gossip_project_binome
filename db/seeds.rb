@@ -38,7 +38,7 @@ end
 
 
 20.times do |index|
-  title = Faker::TvShows::DrWho.character
+  title = Faker::Movie.title
   content = Faker::TvShows::DrWho.quote
   Gossip.create(id: index+1, title: title, content: content, user_id: rand(1..10))
 end

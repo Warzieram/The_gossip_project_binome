@@ -56,3 +56,5 @@ group :test do
 end
 
 gem "faker", "~> 3.5"
+
+gem "railties", "~> 7.2"

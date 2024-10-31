@@ -1,0 +1,12 @@
+<h1>Ville : <%= @city.name %></h1>
+<h2>Potins de la ville :</h2>
+
+<ul>
+  <% @city.users.each do |user| %>
+    <% user.gossips.each do |gossip| %>
+      <li>
+        <%= link_to gossip.title, gossip_path(gossip) %> par <%= link_to user.first_name, user_path(user) %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

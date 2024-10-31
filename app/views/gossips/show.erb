@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> TheGossipProject </title>
+</head>
+
+<body>
+
+    <h1 class="pixel"> <%= @gossip.title %></h1>
+    <% 
+    author = User.find @gossip.user_id
+    author_name = author.first_name + " " + author.last_name
+
+    %>
+
+    <div class="gossip_card">
+
+        <%= @gossip.content %> </br>
+        <%= author_name%> </br>
+        <%= @gossip.created_at%> </br>
+
+        <%= link_to "Voir la page de l'auteur", user_path(author)%>
+        <%= link_to 'Modifier ce potin', edit_gossip_path(@gossip), class: 'btn btn-warning' %>
+        <button href="<%= gossip_path(@gossip) %>" class="btn-danger" onclick="event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer ce potin ?')) { document.getElementById('delete-form-<%= @gossip.id %>').submit(); }">Supprimer</button>
+        <%= form_with(model: @gossip, method: :delete, local: true, id: "delete-form-#{@gossip.id}", style: "display: none;") do |form| %>
+        <% end %>    
+        </div>
+        Ville de l'auteur : <%= link_to @gossip.user.city.name, city_path(@gossip.user.city) %>
+
+
+    
+</body>
+
+</html>

@@ -18,11 +18,17 @@ Rails.application.routes.draw do
 
   get 'welcome/:name', to: "welcome#index"
 
-  get "gossips/:gossip_id", to: "gossips#single_gossip", as: :single_gossip
 
-  get "users/:user_id", to: "users#user_profile", as: :user_profile
+
+  
 
  
-  resources :gossips, only: [:index, :new, :create]
+  resources :gossips
+  resources :gossips do
+    resources :comments, only: [:create, :edit, :update, :destroy]
+  end
+
+  resources :users
+  resources :cities
   
 end
