@@ -6,8 +6,9 @@ class SessionController < ApplicationController
     if user && user.authenticate(filtered_params[:password])
 
       log_in(user)
-      redirect_to gossips_path
       flash[:notice] = nil
+      redirect_to gossips_path
+
     else
       flash[:notice] = "E-mail et/ou mot de passe incorrect(s)"
     end
@@ -17,5 +18,7 @@ class SessionController < ApplicationController
   end
 
   def destroy
+    log_out
+    redirect_to gossips_path
   end
 end

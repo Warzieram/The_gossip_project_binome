@@ -29,6 +29,13 @@
                 <%= link_to "Voir le gossip", gossip_path(gossip.id) %>
             </div>
 
+            <div>
+                Likes : <%= gossip.likes %>
+                <%if current_user%>
+                <%= link_to "Liker", like_gossip_path(gossip.id)%>
+                <%end%>
+                </div>
+
         </div>
 
         <% end %>

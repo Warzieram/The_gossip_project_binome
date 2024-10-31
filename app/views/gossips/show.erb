@@ -20,9 +20,13 @@
         <%= @gossip.created_at%> <br>
 
         <%= link_to "Voir la page de l'auteur", user_path(author)%>
+
+        <%if current_user && current_user == author%>
+
         <%= link_to 'Modifier ce potin', edit_gossip_path(@gossip), class: 'btn btn-warning' %>
         <button href="<%= gossip_path(@gossip) %>" class="btn-danger" onclick="event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer ce potin ?')) { document.getElementById('delete-form-<%= @gossip.id %>').submit(); }">Supprimer</button>
         <%= form_with(model: @gossip, method: :delete, local: true, id: "delete-form-#{@gossip.id}", style: "display: none;") do |form| %>
+        <% end %>
         <% end %>
         Ville de l'auteur : <%= link_to @gossip.user.city.name, city_path(@gossip.user.city) %>
     </div>

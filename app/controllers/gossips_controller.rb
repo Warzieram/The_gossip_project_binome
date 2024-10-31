@@ -8,15 +8,23 @@ class GossipsController < ApplicationController
     @comments = @gossip.comments
   end
 
+  before_action :authenticate_user, only: [ :create, :new, :edit, :update, :destroy, :like ]
+
   def new
     @gossip = Gossip.new
+  end
+
+  def like
+    @gossip = Gossip.find params[:id]
+    @gossip.update(id: @gossip.id, likes: @gossip.likes+1)
+    redirect_to gossips_path
   end
 
   def create
     filtered_params = params.except(:authenticity_token, :commit) # Exclure les paramètres indésirables
     @gossip = Gossip.new(filtered_params.permit(:title, :content))
     @gossip.id = Gossip.all.length + 1
-    @gossip.user = User.find_by(first_name: "anonymous") || User.first
+    @gossip.user = current_user
 
     if @gossip.save # essaie de sauvegarder en base @gossip
       # si ça marche, il redirige vers la page d'index du site
@@ -58,5 +66,12 @@ class GossipsController < ApplicationController
 
   def gossip_params
     params.require(:gossip).permit(:title, :content)
+  end
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Veuillez vous connecter"
+      redirect_to new_session_path
+    end
   end
 end

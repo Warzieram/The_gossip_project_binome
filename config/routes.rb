@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   get "welcome/:name", to: "welcome#index"
 
 
+  get "session/destroy", to: "session#destroy", as: :end_session
 
-
-
+  get "gossips/like/:id", to: "gossips#like", as: :like_gossip
 
   resources :gossips
   resources :gossips do
