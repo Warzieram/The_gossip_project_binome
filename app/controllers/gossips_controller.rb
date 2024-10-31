@@ -5,6 +5,7 @@ class GossipsController < ApplicationController
 
   def show
     @gossip = Gossip.find(params[:id])
+    @comments = @gossip.comments
   end
 
   def new
@@ -38,7 +39,7 @@ class GossipsController < ApplicationController
   def update
     @gossip = Gossip.find(params[:id])
     if @gossip.update(gossip_params)
-      flash[:notice] = 'Potin mis à jour !'
+      flash[:notice] = "Potin mis à jour !"
       redirect_to @gossip
     else
       render :edit
@@ -48,7 +49,7 @@ class GossipsController < ApplicationController
   def destroy
     @gossip = Gossip.find(params[:id])
     @gossip.destroy
-    flash[:notice] = 'Potin supprimé !'
+    flash[:notice] = "Potin supprimé !"
     redirect_to gossips_path
   end
 

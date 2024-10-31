@@ -1,7 +1,4 @@
 class User < ApplicationRecord
-  validates :city, presence: true, uniqueness: true
-  validates :gossip, presence: true
-
   def name
     "#{first_name} #{last_name}"
   end

@@ -10,7 +10,7 @@
 
 require 'faker'
 
-
+Comment.destroy_all
 PrivateMessage.destroy_all
 TaggedGossip.destroy_all
 Tag.destroy_all
@@ -19,7 +19,7 @@ User.destroy_all
 City.destroy_all
 
 10.times do |index|
-  City.create(id: index+1, name: Faker::Address::city)
+  City.create(id: index+1, name: Faker::Address.city)
 end
 
 
@@ -61,4 +61,9 @@ end
 20.times do |index|
   content = Faker::Books::Dune.quote
   PrivateMessage.create(id: index+1, content: content, recipient_id: rand(1..10), sender_id: rand(1..10))
+end
+
+50.times do |index|
+  content = Faker::Books::Lovecraft.sentence
+  Comment.create(id: index+1, content: content, user_id: rand(1..10), gossip_id: rand(1..20))
 end

@@ -15,17 +15,36 @@
 
     <div class="gossip_card">
 
-        <%= @gossip.content %> </br>
-        <%= author_name%> </br>
-        <%= @gossip.created_at%> </br>
+        "<%= @gossip.content %>" <br>
+        -<%= author_name%> <br><br>
+        <%= @gossip.created_at%> <br>
 
         <%= link_to "Voir la page de l'auteur", user_path(author)%>
         <%= link_to 'Modifier ce potin', edit_gossip_path(@gossip), class: 'btn btn-warning' %>
         <button href="<%= gossip_path(@gossip) %>" class="btn-danger" onclick="event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer ce potin ?')) { document.getElementById('delete-form-<%= @gossip.id %>').submit(); }">Supprimer</button>
         <%= form_with(model: @gossip, method: :delete, local: true, id: "delete-form-#{@gossip.id}", style: "display: none;") do |form| %>
-        <% end %>    
-        </div>
+        <% end %>
         Ville de l'auteur : <%= link_to @gossip.user.city.name, city_path(@gossip.user.city) %>
+    </div>
+
+    <div class="comment_section">
+        Commentaires
+        <% 
+        @comments.each do |comment| 
+            comment_author = User.find comment.user_id
+            comment_author_name = comment_author.name
+            comment_content = comment.content
+        %>
+
+        <div class="comment_card">
+            <%= comment_author_name %><br>
+            <%= comment_content%>
+        </div>
+
+        <%end%>
+
+    </div>
+        
 
 
     

@@ -269,3 +269,25 @@ header {
  .link_to_single_gossip{
    margin-left: auto;
  }
+
+ .comment_section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
+ }
+
+ .comment_card{
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border: solid rgb(56, 48, 40);
+    border-radius: 10px;
+    width: 750px;
+    background-color: rgb(119, 118, 117);
+ }
+ 
